@@ -1,0 +1,245 @@
+<html>
+  <head>
+    <title>Puppr v2</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="logo.png" />
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+  
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+  .avatar {
+  height: 50px;
+  position: relative;
+  width: 50px;
+}
+
+.avatar img {
+  border-radius: 9999px;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+@keyframes cycle-colors {
+  0% { border-color: hsl(0, 100%, 50%); }
+  25% { border-color: hsl(90, 100%, 50%); }
+  50% { border-color: hsl(180, 100%, 50%); }
+  75% { border-color: hsl(270, 100%, 50%); }
+  100% { border-color: hsl(360, 100%, 50%); }
+}
+
+@keyframes pulse {
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.avatar::before,
+.avatar::after {
+  animation: pulse 2s linear infinite;
+  border: rgba(52, 127, 174, 0.564) solid 8px;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  content: ' ';
+  height: 140%;
+  left: -20%;
+  opacity: .6;
+  position: absolute;
+  top: -20%;
+  transform: scale(0.714);
+  width: 140%;
+  z-index: 1;
+}
+
+.avatar::after {
+  animation-delay: 1s;
+}
+
+.avatar:hover img {
+  content: url('puppr.png');
+}
+
+.avatar:hover::before,
+.avatar:hover::after {
+  animation: pulse 1s linear infinite, cycle-colors 6s linear infinite;
+}
+
+.avatar:hover::after {
+  animation-delay: .5s;
+}
+</style>
+
+</head>
+  <body class="sans-serif black">
+
+    <!-- Navigation / Header Bar -->
+
+    <nav class="db dt-l w-100 border-box pa3 ph5-l bb b--light-blue" >
+      <a class="db dtc-l v-mid mid-pink link dim w-100 w-25-l tc tl-l mb2 mb0-l" href="#" title="Awwww such cute pupppr">
+                
+        <div class="avatar">
+          <img src="puppr.png" alt="awww such cute puppr">
+        </div>
+      </a>
+      <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+        <div class="link dim dark-pink f6 f5-l dib" href="#" title="Wallet Connect">
+          <div id="prepare">
+            
+            <button class="f6 link dim br2 ph3 pv2 mb2 dib white bg-blue ttu bn" id="btn-connect">
+              Connect wallet
+            </button>
+          </div>
+    
+          <div id="connected" style="display: none">
+            <button class="f6 link dim br2 ph3 pv2 mb2 dib white bg-blue ttu bn" id="btn-disconnect">
+              Disconnect wallet
+            </button>                  
+        </div>
+      </div>
+    </nav>
+    
+    
+    <div id="panels" class="cf">
+
+            <!-- Main -->
+            <div class="fl w-100 w-70-l pa5">
+        
+              <div class="info"> 
+                          
+                <div class="row text-center">
+
+                  
+                    <div class="cf bg-light-gray">
+                      <div class="fl w-100 w-50-ns">
+                        <div class="card-body">TotalSupply<p class="totalSupply"></p></div>
+                      </div>
+                      <div class="fl w-100 w-50-ns">
+                        <div class="card-body">TotalStaked<p class="totalStaked"></p></div>
+                      </div>
+                    </div>
+
+
+                  <div class="col-sm-3"><div class="card">
+                      <h2>Stake</h2>
+                      <div class="card-body"><p>available: <span class="availableStake"></span></p></div>
+                      <div class="card-body">
+                        <input type="text" class="form-control f6 f5-l input-reset bn fl black-80 bg-light-silver pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns" placeholder="Amount" id="stakeAmount">
+                      </div>
+                      <button class="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns" id="stakeButton">Stake</button>
+                    </div></div>
+                  <div class="col-sm-3"><div class="card">
+                      <h2>UnStake</h2>
+                      <div class="card-body"><p>staked: <span class="stakedbalance"></span></p></div>
+                      <div class="card-body">
+                        <input type="text" class="form-control f6 f5-l input-reset bn fl black-80 bg-white pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns" placeholder="Amount" id="unstakeAmount">
+                      </div>
+                      <button class="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns" id="unstakeButton">UnStake</button>
+                    </div></div>
+                  <div class="col-sm-3">
+                    <div class="card">
+                      <h2>Dividends</h2>
+                      <div class="card-body">earnings<p class="dividendsOf"></p></div>
+                      <div class="card-body">
+                      <button class="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2" id="collect">Collect</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+                <!-- <h3>Transfer PUPPR Token</h3>
+                <input type="text" class="form-control" placeholder="Enter value" id="amount">
+                <label for="sendto">Transfer to:</label>
+                <input type="text" class="form-control" placeholder="Enter address" id="to">
+                <button class="btn btn-primary" id="sendEthButton">Transfer</button> -->
+              
+                              
+              </div>
+            </div><!-- / Main -->
+      
+      <!-- Sidebar -->
+      <div class="fl w-100 w-30-l pa4 br b--light-blue">
+        <div id="network">
+          <p>
+            <span class="f7 fw1">Network:</span><br> <span class="" id="network-name">Please connect your wallet</span>
+          </p>
+
+          <p>
+            <span class="f7 fw1">Selected Account:</span><br> <span id="selected-account">0x...</span>
+          </p>
+
+          <p>
+            <span class="f7 fw1">BNB Balance:</span><br> <span class="balance">00.0000</span>
+          </p>
+
+        </div>
+
+        <div class="dashboard">
+          <!-- <div class="card bt bb b--light-blue pa2">
+              <h3>BNB</h3>
+              <div class="card-body"><p>MainNetBalance: <span class="balance"></span></p></div>
+              <button class="f5 link dim br2 ph3 pv2 mb2 dib white fw7 bg-blue ttu ba b--blue " id="buyBNB" style="background-image: url(img/static-blue.gif);">BUY BNB</button>
+          </div> -->
+
+          <div class="card bt bb b--light-blue br2">
+              <h3>$PUPPR</h3>
+              <div class="card-body"><p>Contract: <span class="puppr"></span></p></div>
+              <div class="card-body"><p>BSCScan: <span class="pupprscan"></span></p></div>
+              <div class="card-footer"><p>Your Balance: <span class="pupprbalance"></span> PUPPR </p>
+              </div>
+            </div>            
+         </div>
+         
+         <!-- <div class="card bb b--light-blue">
+          <h3>Add PUPPR to MetaMask</h3>
+          <button class="f5 link dim br2 ph3 pv2 mb2 dib white fw7 bg-blue ttu ba b--blue" id="addToken">Add Puppr</button>
+        </div> -->
+      </div><!-- / Sidebar -->
+
+
+
+
+
+  
+    </div><!-- #panels -->
+
+
+
+
+    <section class="mw5 mw7-ns center pa3 ph5-ns">
+
+    <!--  hide main div when not connected see index.html connect.js method " style="display: none""-->
+  
+      <div class="alert alert-danger" id="alert-error-https" style="display: none">
+        You can run this shit only over HTTPS connection.
+      </div>
+
+    <!-- logged logged out state -->
+      <div id="welcome" class="text-center">
+        <!-- <h1>hi</h1> -->
+      </div> 
+      <div id="goodbye">
+        <!-- <h1>bye</h1> -->
+      </div> 
+    
+    </section>
+
+
+    <!-- <script type="text/javascript" src="https://unpkg.com/web3@1.2.11/dist/web3.min.js"></script> -->
+    <script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+
+    <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.0/dist/index.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.4.1/dist/umd/index.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script>
+
+    <script type="text/javascript" src="connect.js"></script>
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </body>
+</html>

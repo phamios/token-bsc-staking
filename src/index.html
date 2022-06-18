@@ -1,0 +1,134 @@
+
+<html>
+  <head>
+    <title>Puppr</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+
+</head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+        
+          <div class="alert alert-danger" id="alert-error-https" style="display: none">
+            You can run this example only over HTTPS connection.
+          </div>
+
+          <div id="prepare">
+            <button class="btn btn-success" id="btn-connect">
+              Connect wallet
+            </button>
+          </div>
+    
+          <div id="connected" style="display: none">
+            <button class="btn btn-danger" id="btn-disconnect">
+              Disconnect wallet
+            </button>
+         
+            <hr>
+
+            <div id="network">
+              <p>
+                <strong>Connected Blockchain:</strong> <span id="network-name"></span>
+              </p>
+
+              <p>
+                <strong>Selected Account:</strong> <span id="selected-account"></span>
+              </p>
+
+              <p>
+                <strong>BNB MainNetBalance:</strong> <span class="balance"></span>
+              </p>
+
+            </div>
+            <h1 id="dashboard">$PUPPR</h1>
+            <hr>
+
+           <div class="dashboard">
+            <div class="card">
+                <div class="card-header">BNB</div>
+                <div class="card-body"><p>MainNetBalance: <span class="balance"></span></p></div>
+                <button class="btn btn-primary" id="buyBNB">BUY BNB</button>
+              </div>
+            <div class="card">
+                <div class="card-header">PUPPR</div>
+                <div class="card-body"><p>Contract: <span class="puppr"></span></p></div>
+                <div class="card-body"><p>BSCScan: <span class="pupprscan"></span></p></div>
+                <div class="card-footer"><p>Balance: <span class="pupprbalance"></span> PUPPR </p><button class="btn btn-primary float-right" id="addToken">AddToken</button></div>
+              </div>
+              
+              <hr>
+           </div>
+           
+            <div class="info">
+                
+                    
+                  <div class="row text-center">
+                    <div class="col-sm-3">
+                        <div class="card">
+                        <div class="card-header">TokenInfo</div>
+                        <div class="card-body">TotalSupply<p class="totalSupply"></p></div>
+                        <div class="card-body">TotalStaked<p class="totalStaked"></p></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-3"><div class="card">
+                        <div class="card-header">Stake</div>
+                        <div class="card-body"><p>available: <span class="availableStake"></span></p></div>
+                        <div class="card-body"><input type="text" class="form-control" placeholder="Amount" id="stakeAmount"></div>
+                        <button class="btn btn-primary" id="stakeButton">Stake</button>
+                      </div></div>
+                    <div class="col-sm-3"><div class="card">
+                        <div class="card-header">UnStake</div>
+                        <div class="card-body"><p>staked: <span class="stakedbalance"></span></p></div>
+                        <div class="card-body"><input type="text" class="form-control" placeholder="Amount" id="unstakeAmount"></div>
+                        <button class="btn btn-primary" id="unstakeButton">UnStake</button>
+                      </div></div>
+                    <div class="col-sm-3"><div class="card">
+                        <div class="card-header">Dividends</div>
+                        <div class="card-body">earnings<p class="dividendsOf"></p></div>
+                        <div class="card-body"><p></p></div>
+                        <button class="btn btn-primary" id="collect">Collect</button>
+                      </div></div>
+                  </div>
+                  <hr>
+                  <h3>Transfer PUPPR Token</h3>
+                  <input type="text" class="form-control" placeholder="Enter value" id="amount">
+                  <label for="sendto">Transfer to:</label>
+                  <input type="text" class="form-control" placeholder="Enter address" id="to">
+                  <button class="btn btn-primary" id="sendEthButton">Transfer</button>
+                <hr>
+                                
+             </div>
+
+
+        
+    </div>
+    
+
+  <div id="welcome" class="text-center">
+    <h1></h1>
+  </div> 
+  <div id="goodbye">
+    <h1></h1>
+  </div> 
+      
+</div>
+    
+    <script type="text/javascript" src="https://unpkg.com/web3@1.2.11/dist/web3.min.js"></script>
+
+    <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.0/dist/index.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script>
+
+    <script type="text/javascript" src="connect.js"></script>
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </body>
+</html>
